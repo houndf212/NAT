@@ -30,10 +30,9 @@ DataPacket UdpSocket::nextPacket()
     return p;
 }
 
-quint64 UdpSocket::sendPacket(const Host &host, Packet &p)
+quint64 UdpSocket::sendPacket(const Host &host, const Packet &p)
 {
     Q_ASSERT(p.isValid());
-    p.setVaue("time", QDateTime::currentDateTime().toString(Qt::ISODate));
     return socket->writeDatagram(p.toData(), host.addr, host.port);
 }
 

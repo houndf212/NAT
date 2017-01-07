@@ -2,7 +2,7 @@
 #define PACKET_H
 
 #include <QtCore>
-
+#include <new>
 class Packet
 {
 public:
@@ -45,6 +45,9 @@ public:
 private:
     Packet::Type pid;
     QJsonObject obj;
+public:
+    static void* operator new(std::size_t ) = delete;
+    static void* operator new(std::size_t, void*) = delete;
 };
 
 #endif // PACKET_H

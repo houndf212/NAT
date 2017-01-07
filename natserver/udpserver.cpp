@@ -196,7 +196,7 @@ void UdpServer::hand_ask_hole(const DataPacket& p)
     send_packet(host1, p2);
 }
 
-void UdpServer::send_packet(const Host &h, Packet &p)
+void UdpServer::send_packet(const Host &h, const Packet &p)
 {
     Q_ASSERT(p.isValid());
     socket->sendPacket(h, p);

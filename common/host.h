@@ -12,8 +12,6 @@ struct Host
     QString toString() const;
 };
 
-bool operator <(const Host& h1, const Host& h2);
-
 inline bool operator ==(const Host& h1, const Host& h2)
 {
     return h1.addr == h2.addr && h1.port == h2.port;
@@ -35,6 +33,11 @@ inline uint qHash(const Host& h)
     n <<= 32;
     n += h.port;
     return qHash(n);
+}
+
+inline bool operator <(const Host& h1, const Host& h2)
+{
+    return qHash(h1) < qHash(h2);
 }
 
 #endif // HOST_H

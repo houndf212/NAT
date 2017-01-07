@@ -14,12 +14,14 @@ Packet Packet::fromData(const QByteArray &data)
     Packet::Type pid = Packet::Type(obj.value(key_id).toInt(0));
     Packet p(pid);
     p.obj = obj;
+    p.obj.insert("recv_time",QDateTime::currentDateTime().toString(Qt::ISODate));
     return p;
 }
 
 Packet::Packet(Packet::Type id)
     :pid(id)
 {
+    setVaue("send_time", QDateTime::currentDateTime().toString(Qt::ISODate));
 }
 
 QByteArray Packet::toData() const

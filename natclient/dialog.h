@@ -29,7 +29,7 @@ private:
     void doCon();
     void disCon();
     Host getServerHost() const;
-    void send_packet(const Host& h, Packet& p);
+    void send_packet(const Host& h, const Packet &p);
     void logMsg(const QString& msg);
 
     void hand_packet(const DataPacket& p);

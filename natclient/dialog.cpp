@@ -16,7 +16,7 @@ Dialog::Dialog(QWidget *parent) :
     connect(socket, &UdpSocket::sig_packet, this, &Dialog::onUdpData);
 
     ui->txtName->setText("wc");
-    ui->txtIP->setText("192.168.4.40");
+    ui->txtIP->setText("127.0.0.1");
     ui->numPort->setValue(2333);
 
     QList<QHostAddress> lst = QNetworkInterface::allAddresses();
@@ -92,10 +92,7 @@ void Dialog::doCon()
 
 void Dialog::disCon()
 {
-    Packet p (Packet::ASK_Disconnect);
-    send_packet(getServerHost(), p);
-    // gcc cannot alowed!
-//    send_packet(getServerHost(), Packet(Packet::ASK_Disconnect));
+    send_packet(getServerHost(), Packet(Packet::ASK_Disconnect));
 }
 
 Host Dialog::getServerHost() const
@@ -106,7 +103,7 @@ Host Dialog::getServerHost() const
     return host;
 }
 
-void Dialog::send_packet(const Host &h, Packet &p)
+void Dialog::send_packet(const Host &h, const Packet &p)
 {
     Q_ASSERT(p.isValid());
     socket->sendPacket(h, p);
@@ -175,6 +172,7 @@ void Dialog::hand_rep_connect(const DataPacket &p)
     ui->txtName->setEnabled(false);
     ui->txtIPs->setEnabled(false);
     ui->btnConnect->setEnabled(false);
+    setWindowTitle(ui->txtName->text().trimmed());
 }
 
 void Dialog::hand_ask_heart(const DataPacket &p)

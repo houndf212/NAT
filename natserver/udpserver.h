@@ -13,7 +13,7 @@ public:
 private:
     Q_SLOT void onDataReady();
     Q_SLOT void onTimeout();
-    void send_packet(const Host& h, Packet& p);
+    void send_packet(const Host& h, const Packet &p);
     void ask_heart(const Host& h);
 
     void hand_packet(const DataPacket& p);

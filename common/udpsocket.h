@@ -22,7 +22,7 @@ public:
     Q_SIGNAL void sig_packet();
     bool hasPacket() const;
     DataPacket nextPacket();
-    quint64 sendPacket(const Host& host, Packet& p);
+    quint64 sendPacket(const Host& host, const Packet& p);
 private:
     QUdpSocket *socket;
 };
